@@ -45,17 +45,17 @@ const Avatar = {
 
 const Price = {
   MIN: 0,
-  MAX: 1000000,
+  MAX: 10000,
 };
 
 const Rooms = {
-  MIN: 0,
-  MAX: 100,
+  MIN: 2,
+  MAX: 4,
 };
 
 const Guests = {
   MIN: 0,
-  MAX: 100,
+  MAX: 10,
 };
 
 const X = {
@@ -71,13 +71,21 @@ const Y = {
 };
 
 const createAd = () => {
+  const getLocationX = getRandomInteger(X.MIN, X.MAX, X.Accuracy);
+  const getLocationY = getRandomInteger(Y.MIN, Y.MAX, Y.Accuracy);
+  let getUserAvatar = getRandomIntInclusive(Avatar.MIN, Avatar.MAX);
+
+  if (getUserAvatar < 10) {
+    getUserAvatar = '0' + getUserAvatar;
+  }
+
   return {
     author: {
-      avatar: 'img/avatars/user0' + getRandomIntInclusive(Avatar.MIN, Avatar.MAX) + '.png',
+      avatar: 'img/avatars/user' + getUserAvatar + '.png',
     },
     offer: {
-      title: 'Милая, уютная квартирка в центре Токио',
-      address: '{{location.x}}, {{location.y}}',
+      title: 'Уютное, недорогое жилье в отличном районе Токио',
+      address: String(getLocationX + ', ' + getLocationY),
       price: getRandomIntInclusive(Price.MIN, Price.MAX),
       type: TYPES[getRandomIntInclusive(0, TYPES.length - 1)],
       rooms: getRandomIntInclusive(Rooms.MIN, Rooms.MAX),
@@ -89,12 +97,12 @@ const createAd = () => {
       photos: PHOTOS.sort(() => Math.random() - HALF).slice(getRandomIntInclusive(0, PHOTOS.length - 1)),
     },
     location: {
-      x: getRandomInteger(X.MIN, X.MAX, X.Accuracy),
-      y: getRandomInteger(Y.MIN, Y.MAX, Y.Accuracy),
+      x: getLocationX,
+      y: getLocationY,
     },
   };
 };
 
-const similarAds = new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
+const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
 
-export {similarAds};
+export {createAds};
