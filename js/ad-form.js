@@ -1,3 +1,24 @@
+// Перевод формы в неактивное состояние
+
+const form = document.querySelector('.ad-form');
+const formFields = document.querySelectorAll('.ad-form fieldset');
+
+const deactivateForm = () => {
+  form.classList.add('ad-form--disabled');
+  for (let i = 0; i < formFields.length; i++) {
+    formFields[i].setAttribute('disabled', 'disabled');
+  }
+};
+
+const activateForm = () => {
+  form.classList.remove('ad-form--disabled');
+  for (let i = 0; i < formFields.length; i++) {
+    formFields[i].removeAttribute('disabled');
+  }
+};
+
+deactivateForm();
+
 // Обработка пользовательского ввода для полей «Тип жилья» и «Цена за ночь»
 
 const housingType = document.querySelector('#type');
@@ -43,3 +64,5 @@ timeOut.addEventListener('change', () => {
     timeIn.value = '14:00';
   }
 });
+
+export { activateForm };
