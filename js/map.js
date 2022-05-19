@@ -1,8 +1,7 @@
 import * as L from '../leaflet/leaflet-src.esm.js';
-import { activateForm } from './ad-form.js';
+import { activateForm, address } from './ad-form.js';
 import { activateFilter } from './map-filter.js';
-
-const address = document.querySelector('#address');
+import { similarCards } from './card.js';
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -14,7 +13,7 @@ const map = L.map('map-canvas')
       lat: 35.675,
       lng: 139.75,
     },
-    10,
+    13,
   );
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,4 +50,26 @@ mainPinMarker.on('moveend', (evt) => {
     evt.target._latlng.lat.toFixed(5) +
     ', ' +
     evt.target._latlng.lng.toFixed(5);
+});
+
+let pins = similarCards;
+
+pins.forEach(({ location }) => {
+  const pinIcon = L.icon({
+    iconUrl: './img/pins/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  const pinMarker = L.marker(
+    {
+      lat: location.x,
+      lng: location.y,
+    },
+    {
+      icon: pinIcon,
+    },
+  );
+
+  pinMarker.addTo(map);
 });

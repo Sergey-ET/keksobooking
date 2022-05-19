@@ -1,23 +1,10 @@
-import {getRandomIntInclusive, getRandomInteger} from './util.js';
+import { getRandomIntInclusive, getRandomInteger } from './util.js';
 
-const TYPES = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-];
+const TYPES = ['palace', 'flat', 'house', 'bungalow'];
 
-const CHECKINS = [
-  '12:00',
-  '13:00',
-  '14:00',
-];
+const CHECKINS = ['12:00', '13:00', '14:00'];
 
-const CHECKOUTS = [
-  '12:00',
-  '13:00',
-  '14:00',
-];
+const CHECKOUTS = ['12:00', '13:00', '14:00'];
 
 const FEATURES = [
   'wifi',
@@ -59,14 +46,14 @@ const Guests = {
 };
 
 const X = {
-  MIN: 35.65000,
-  MAX: 35.70000,
+  MIN: 35.65,
+  MAX: 35.7,
   Accuracy: 5,
 };
 
 const Y = {
-  MIN: 139.70000,
-  MAX: 139.80000,
+  MIN: 139.7,
+  MAX: 139.8,
   Accuracy: 5,
 };
 
@@ -92,9 +79,13 @@ const createAd = () => {
       guests: getRandomIntInclusive(Guests.MIN, Guests.MAX),
       checkin: CHECKINS[getRandomIntInclusive(0, CHECKINS.length - 1)],
       checkout: CHECKOUTS[getRandomIntInclusive(0, CHECKOUTS.length - 1)],
-      features: FEATURES.sort(() => Math.random() - HALF).slice(getRandomIntInclusive(0, FEATURES.length - 1)),
+      features: FEATURES.sort(() => Math.random() - HALF).slice(
+        getRandomIntInclusive(0, FEATURES.length - 1),
+      ),
       description: 'Жильё просто замечательное!',
-      photos: PHOTOS.sort(() => Math.random() - HALF).slice(getRandomIntInclusive(0, PHOTOS.length - 1)),
+      photos: PHOTOS.sort(() => Math.random() - HALF).slice(
+        getRandomIntInclusive(0, PHOTOS.length - 1),
+      ),
     },
     location: {
       x: getLocationX,
@@ -103,6 +94,7 @@ const createAd = () => {
   };
 };
 
-const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
+const createAds = () =>
+  new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
 
-export {createAds};
+export { createAds };

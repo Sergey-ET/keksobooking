@@ -14,8 +14,9 @@ const similarCardTemplate = document
 
 const similarCards = createAds();
 
+// renderSimilarList - Отрисовка похожих карточек только после того, как пользователь захочет открыть окно настроек (хороший тон).
+
 const renderSimilarList = () => {
-  // Отрисовка похожих карточек только после того, как пользователь захочет открыть окно настроек (хороший тон).
   const similarListFragment = document.createDocumentFragment();
 
   similarCards.forEach(({ offer, author }) => {
@@ -74,9 +75,12 @@ const renderSimilarList = () => {
   similarListElement.appendChild(similarListFragment);
 };
 
+// Очистка списка похожих карточек
+
 const clearSimilarList = () => {
-  // Очистка списка похожих карточек
   similarListElement.innerHTML = '';
 };
 
-export { renderSimilarList, clearSimilarList };
+// Экспорт данных
+
+export { renderSimilarList, clearSimilarList, similarCards };

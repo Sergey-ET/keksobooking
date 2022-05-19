@@ -65,4 +65,11 @@ timeOut.addEventListener('change', () => {
   }
 });
 
-export { activateForm };
+// Настройка поля адреса
+
+const address = document.querySelector('#address');
+address.setAttribute('readonly', 'readonly');
+
+// Экспорт данных
+
+export { activateForm, address };
