@@ -1,7 +1,11 @@
 import * as L from '../leaflet/leaflet-src.esm.js';
 import { activateForm, address } from './ad-form.js';
 import { activateFilter } from './map-filter.js';
-import { similarCards } from './card.js';
+import { renderCard } from './card.js';
+import { createAds } from './data.js';
+
+const COORDINATE_ACCURACY = 5;
+const pins = createAds();
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -41,20 +45,18 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(map);
 
 address.value =
-  mainPinMarker._latlng.lat.toFixed(5) +
+  mainPinMarker.getLatLng().lat.toFixed(COORDINATE_ACCURACY) +
   ', ' +
-  mainPinMarker._latlng.lng.toFixed(5);
+  mainPinMarker.getLatLng().lng.toFixed(COORDINATE_ACCURACY);
 
 mainPinMarker.on('moveend', (evt) => {
   address.value =
-    evt.target._latlng.lat.toFixed(5) +
+    evt.target.getLatLng().lat.toFixed(COORDINATE_ACCURACY) +
     ', ' +
-    evt.target._latlng.lng.toFixed(5);
+    evt.target.getLatLng().lng.toFixed(COORDINATE_ACCURACY);
 });
 
-let pins = similarCards;
-
-pins.forEach(({ location }) => {
+pins.forEach(({ offer, location, author }) => {
   const pinIcon = L.icon({
     iconUrl: './img/pins/pin.svg',
     iconSize: [40, 40],
@@ -71,5 +73,7 @@ pins.forEach(({ location }) => {
     },
   );
 
-  pinMarker.addTo(map);
+  pinMarker.addTo(map).bindPopup(renderCard({ offer, location, author }), {
+    keepInView: true,
+  });
 });
