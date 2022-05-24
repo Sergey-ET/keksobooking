@@ -1,6 +1,6 @@
 import * as L from '../leaflet/leaflet-src.esm.js';
-import { activateForm, address } from './ad-form.js';
-import { activateFilter } from './map-filter.js';
+import { activateForm, address } from './form.js';
+import { activateFilter } from './filter.js';
 import { renderCard } from './card.js';
 import { createAds } from './data.js';
 
