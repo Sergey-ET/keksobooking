@@ -5,6 +5,13 @@ const TitleLength = {
   MAX: 100,
 };
 
+const MinPriceOfType = {
+  palace: 10000,
+  flat: 1000,
+  house: 5000,
+  bungalow: 0,
+};
+
 const form = document.querySelector('.ad-form');
 const formFieldsets = document.querySelectorAll('.ad-form fieldset');
 const housingType = document.querySelector('#type');
@@ -33,19 +40,8 @@ const activateForm = () => {
 // Обработка пользовательского ввода для полей «Тип жилья» и «Цена за ночь»
 
 housingType.addEventListener('change', () => {
-  if (housingType.value === 'bungalow') {
-    housingPrice.min = 0;
-    housingPrice.placeholder = '0';
-  } else if (housingType.value === 'flat') {
-    housingPrice.min = 1000;
-    housingPrice.placeholder = '1000';
-  } else if (housingType.value === 'house') {
-    housingPrice.min = 5000;
-    housingPrice.placeholder = '5000';
-  } else {
-    housingPrice.min = 10000;
-    housingPrice.placeholder = '10000';
-  }
+  housingPrice.min = MinPriceOfType[housingType.value];
+  housingPrice.placeholder = MinPriceOfType[housingType.value];
 });
 
 // Обработка пользовательского ввода для полей «Время заезда» и «Время выезда»
