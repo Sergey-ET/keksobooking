@@ -1,4 +1,4 @@
-// Перевод фильтров в неактивное состояние
+// Перевод фильтров в неактивное/активное состояние
 
 const filter = document.querySelector('.map__filters');
 const filterSelects = document.querySelectorAll('.map__filters select');

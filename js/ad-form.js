@@ -1,3 +1,8 @@
+const TitleLength = {
+  MIN: 30,
+  MAX: 100,
+};
+
 const form = document.querySelector('.ad-form');
 const formFieldsets = document.querySelectorAll('.ad-form fieldset');
 const housingType = document.querySelector('#type');
@@ -5,8 +10,9 @@ const housingPrice = document.querySelector('#price');
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const address = document.querySelector('#address');
+const titleInput = document.querySelector('#title');
 
-// Перевод формы в неактивное состояние
+// Перевод формы в неактивное/активное состояние
 
 const deactivateForm = () => {
   form.classList.add('ad-form--disabled');
@@ -64,9 +70,33 @@ timeOut.addEventListener('change', () => {
   }
 });
 
-// Настройка поля адреса
+// Настройка поля адреса (запрет на ручное редактирование)
 
 address.setAttribute('readonly', 'readonly');
+
+// Валидация поля заголовка
+
+titleInput.addEventListener('input', () => {
+  const valueLength = titleInput.value.length;
+
+  if (valueLength < TitleLength.MIN) {
+    titleInput.setCustomValidity(
+      'Слишком короткий заголовок! Пожалуйста, добавьте ещё ' +
+        (TitleLength.MIN - valueLength) +
+        ' символов(-а)',
+    );
+  } else if (valueLength > TitleLength.MAX) {
+    titleInput.setCustomValidity(
+      'Слишком длинный заголовок! Пожалуйста, удалите лишние ' +
+        (valueLength - TitleLength.MAX) +
+        ' символов(-а)',
+    );
+  } else {
+    titleInput.setCustomValidity('');
+  }
+
+  titleInput.reportValidity();
+});
 
 // Экспорт данных
 
