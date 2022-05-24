@@ -1,3 +1,5 @@
+const COORDINATE_ACCURACY = 5;
+
 const TitleLength = {
   MIN: 30,
   MAX: 100,
@@ -68,9 +70,14 @@ timeOut.addEventListener('change', () => {
   }
 });
 
-// Настройка поля адреса (запрет на ручное редактирование)
+// Заполнение поля адреса координатами
 
-address.setAttribute('readonly', 'readonly');
+const getAddressCoordinates = (coordinates) => {
+  address.value =
+    coordinates.lat.toFixed(COORDINATE_ACCURACY) +
+    ', ' +
+    coordinates.lng.toFixed(COORDINATE_ACCURACY);
+};
 
 // Валидация поля заголовка
 
@@ -98,4 +105,4 @@ titleInput.addEventListener('input', () => {
 
 // Экспорт данных
 
-export { deactivateForm, activateForm, address };
+export { deactivateForm, activateForm, getAddressCoordinates };
