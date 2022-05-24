@@ -47,23 +47,11 @@ housingType.addEventListener('change', () => {
 // Обработка пользовательского ввода для полей «Время заезда» и «Время выезда»
 
 timeIn.addEventListener('change', () => {
-  if (timeIn.value === '12:00') {
-    timeOut.value = '12:00';
-  } else if (timeIn.value === '13:00') {
-    timeOut.value = '13:00';
-  } else {
-    timeOut.value = '14:00';
-  }
+  timeOut.value = timeIn.value;
 });
 
 timeOut.addEventListener('change', () => {
-  if (timeOut.value === '12:00') {
-    timeIn.value = '12:00';
-  } else if (timeOut.value === '13:00') {
-    timeIn.value = '13:00';
-  } else {
-    timeIn.value = '14:00';
-  }
+  timeIn.value = timeOut.value;
 });
 
 // Заполнение поля адреса координатами
