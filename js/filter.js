@@ -24,6 +24,4 @@ const activateFilter = () => {
   }
 };
 
-deactivateFilter();
-
-export { activateFilter };
+export { deactivateFilter, activateFilter };

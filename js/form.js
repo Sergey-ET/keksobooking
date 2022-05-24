@@ -28,8 +28,6 @@ const activateForm = () => {
   }
 };
 
-deactivateForm();
-
 // Обработка пользовательского ввода для полей «Тип жилья» и «Цена за ночь»
 
 housingType.addEventListener('change', () => {
@@ -100,4 +98,4 @@ titleInput.addEventListener('input', () => {
 
 // Экспорт данных
 
-export { activateForm, address };
+export { deactivateForm, activateForm, address };
