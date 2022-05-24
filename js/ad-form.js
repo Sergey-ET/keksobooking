@@ -1,28 +1,30 @@
-// Перевод формы в неактивное состояние
-
 const form = document.querySelector('.ad-form');
-const formFields = document.querySelectorAll('.ad-form fieldset');
+const formFieldsets = document.querySelectorAll('.ad-form fieldset');
+const housingType = document.querySelector('#type');
+const housingPrice = document.querySelector('#price');
+const timeIn = document.querySelector('#timein');
+const timeOut = document.querySelector('#timeout');
+const address = document.querySelector('#address');
+
+// Перевод формы в неактивное состояние
 
 const deactivateForm = () => {
   form.classList.add('ad-form--disabled');
-  for (let i = 0; i < formFields.length; i++) {
-    formFields[i].setAttribute('disabled', 'disabled');
+  for (let i = 0; i < formFieldsets.length; i++) {
+    formFieldsets[i].setAttribute('disabled', 'disabled');
   }
 };
 
 const activateForm = () => {
   form.classList.remove('ad-form--disabled');
-  for (let i = 0; i < formFields.length; i++) {
-    formFields[i].removeAttribute('disabled');
+  for (let i = 0; i < formFieldsets.length; i++) {
+    formFieldsets[i].removeAttribute('disabled');
   }
 };
 
 deactivateForm();
 
 // Обработка пользовательского ввода для полей «Тип жилья» и «Цена за ночь»
-
-const housingType = document.querySelector('#type');
-const housingPrice = document.querySelector('#price');
 
 housingType.addEventListener('change', () => {
   if (housingType.value === 'bungalow') {
@@ -41,9 +43,6 @@ housingType.addEventListener('change', () => {
 });
 
 // Обработка пользовательского ввода для полей «Время заезда» и «Время выезда»
-
-const timeIn = document.querySelector('#timein');
-const timeOut = document.querySelector('#timeout');
 
 timeIn.addEventListener('change', () => {
   if (timeIn.value === '12:00') {
@@ -67,7 +66,6 @@ timeOut.addEventListener('change', () => {
 
 // Настройка поля адреса
 
-const address = document.querySelector('#address');
 address.setAttribute('readonly', 'readonly');
 
 // Экспорт данных
