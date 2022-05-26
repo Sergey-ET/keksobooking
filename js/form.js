@@ -20,6 +20,8 @@ const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const address = document.querySelector('#address');
 const titleInput = document.querySelector('#title');
+const roomNumber = document.querySelector('#room_number');
+const capacity = document.querySelector('#capacity');
 
 // Перевод формы в неактивное/активное состояние
 
@@ -91,6 +93,7 @@ titleInput.addEventListener('input', () => {
 });
 
 // Валидация поля c ценой
+
 housingPrice.addEventListener('input', () => {
   if (housingPrice.value < MinPriceOfType[housingType.value]) {
     housingPrice.style.borderColor = 'red';
@@ -111,6 +114,38 @@ housingPrice.addEventListener('input', () => {
 
   housingPrice.reportValidity();
 });
+
+// Обработка пользовательского ввода для полей «Количество комнат» и «Количество мест»
+
+const onRoomsPlacesNumberChange = () => {
+  if (roomNumber.value === '1' && capacity.value !== '1') {
+    capacity.style.borderColor = 'red';
+    capacity.setCustomValidity('Одна комната только для одного гостя!');
+  } else if (
+    roomNumber.value === '2' &&
+    capacity.value !== '1' &&
+    capacity.value !== '2'
+  ) {
+    capacity.style.borderColor = 'red';
+    capacity.setCustomValidity(
+      'Две комнаты только для одного или двух гостей!',
+    );
+  } else if (roomNumber.value === '3' && capacity.value === '0') {
+    capacity.style.borderColor = 'red';
+    capacity.setCustomValidity('Три комнаты для одного, двух или трех гостей!');
+  } else if (roomNumber.value === '100' && capacity.value !== '0') {
+    capacity.style.borderColor = 'red';
+    capacity.setCustomValidity('Сто комнат не для гостей!');
+  } else {
+    capacity.style.borderColor = '#d9d9d3';
+    capacity.setCustomValidity('');
+  }
+
+  capacity.reportValidity();
+};
+
+roomNumber.addEventListener('change', onRoomsPlacesNumberChange);
+capacity.addEventListener('change', onRoomsPlacesNumberChange);
 
 // Экспорт данных
 
