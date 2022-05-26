@@ -32,6 +32,8 @@ const deactivateForm = () => {
   }
 };
 
+deactivateForm();
+
 const activateForm = () => {
   form.classList.remove('ad-form--disabled');
   for (let i = 0; i < formFieldsets.length; i++) {

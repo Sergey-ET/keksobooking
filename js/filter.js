@@ -1,8 +1,8 @@
 // Перевод фильтров в неактивное/активное состояние
 
 const filter = document.querySelector('.map__filters');
-const filterSelects = document.querySelectorAll('.map__filters select');
-const filterFieldsets = document.querySelectorAll('.map__filters fieldset');
+const filterSelects = filter.querySelectorAll('.map__filters select');
+const filterFieldsets = filter.querySelectorAll('.map__filters fieldset');
 
 const deactivateFilter = () => {
   filter.classList.add('map__filters--disabled');
@@ -13,6 +13,8 @@ const deactivateFilter = () => {
     filterFieldsets[i].setAttribute('disabled', 'disabled');
   }
 };
+
+deactivateFilter();
 
 const activateFilter = () => {
   filter.classList.remove('map__filters--disabled');
