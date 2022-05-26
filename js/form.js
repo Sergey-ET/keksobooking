@@ -90,6 +90,28 @@ titleInput.addEventListener('input', () => {
   titleInput.reportValidity();
 });
 
+// Валидация поля c ценой
+housingPrice.addEventListener('input', () => {
+  if (housingPrice.value < MinPriceOfType[housingType.value]) {
+    housingPrice.style.borderColor = 'red';
+    housingPrice.setCustomValidity(
+      'Минимальная цена за ночь - ' +
+        MinPriceOfType[housingType.value] +
+        ' руб.',
+    );
+  } else if (housingPrice.value > 1000000) {
+    housingPrice.style.borderColor = 'red';
+    housingPrice.setCustomValidity(
+      'Максимальная цена за ночь - 1 000 000 руб.',
+    );
+  } else {
+    housingPrice.style.borderColor = '#d9d9d3';
+    housingPrice.setCustomValidity('');
+  }
+
+  housingPrice.reportValidity();
+});
+
 // Экспорт данных
 
 export { deactivateForm, activateForm, getAddressCoordinates };
