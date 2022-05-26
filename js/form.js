@@ -13,15 +13,15 @@ const MinPriceOfType = {
 };
 
 const form = document.querySelector('.ad-form');
-const formFieldsets = document.querySelectorAll('.ad-form fieldset');
-const housingType = document.querySelector('#type');
-const housingPrice = document.querySelector('#price');
-const timeIn = document.querySelector('#timein');
-const timeOut = document.querySelector('#timeout');
-const address = document.querySelector('#address');
-const titleInput = document.querySelector('#title');
-const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
+const formFieldsets = form.querySelectorAll('.ad-form fieldset');
+const housingType = form.querySelector('#type');
+const housingPrice = form.querySelector('#price');
+const timeIn = form.querySelector('#timein');
+const timeOut = form.querySelector('#timeout');
+const address = form.querySelector('#address');
+const titleInput = form.querySelector('#title');
+const roomNumber = form.querySelector('#room_number');
+const capacity = form.querySelector('#capacity');
 
 // Перевод формы в неактивное/активное состояние
 
