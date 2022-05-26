@@ -69,18 +69,21 @@ titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
 
   if (valueLength < TitleLength.MIN) {
+    titleInput.style.borderColor = 'red';
     titleInput.setCustomValidity(
       'Слишком короткий заголовок! Пожалуйста, добавьте ещё ' +
         (TitleLength.MIN - valueLength) +
         ' символов(-а)',
     );
   } else if (valueLength > TitleLength.MAX) {
+    titleInput.style.borderColor = 'red';
     titleInput.setCustomValidity(
       'Слишком длинный заголовок! Пожалуйста, удалите лишние ' +
         (valueLength - TitleLength.MAX) +
         ' символов(-а)',
     );
   } else {
+    titleInput.style.borderColor = '#d9d9d3';
     titleInput.setCustomValidity('');
   }
 
