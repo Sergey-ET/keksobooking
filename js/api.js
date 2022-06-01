@@ -1,8 +1,8 @@
-const DATA = 'https://23.javascript.pages.academy/keksobooking/data';
-const SERVER = 'https://23.javascript.pages.academy/keksobooking';
+const SERVER_FROM = 'https://23.javascript.pages.academy/keksobooking/data';
+const SERVER_TO = 'https://23.javascript.pages.academy/keksobooking';
 
 const getData = (onSuccess, onFail) => {
-  fetch(DATA)
+  fetch(SERVER_FROM)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -12,21 +12,19 @@ const getData = (onSuccess, onFail) => {
     .then((response) => {
       onSuccess(response);
     })
-    .catch((err) => {
-      onFail(`Ошибка загрузки данных ${err}`);
+    .catch(() => {
+      onFail('ОШИБКА ЗАГРУЗКИ ДАННЫХ');
     });
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch(SERVER, {
+  fetch(SERVER_TO, {
     method: 'POST',
     body,
   })
     .then((response) => {
       if (response.ok) {
         onSuccess('Ваше объявление успешно размещено!');
-      } else if (response.status >= 500 && response.status <= 505) {
-        onFail('Не удалось получить данные с сервера. Попробуйте ещё раз!');
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз!');
       }

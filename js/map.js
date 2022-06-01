@@ -2,6 +2,7 @@ import { activateForm, getAddressCoordinates } from './form.js';
 import { activateFilter } from './filter.js';
 import { renderCard } from './card.js';
 import { getData } from './api.js';
+import { showAlert } from './util.js';
 
 const L = window.L;
 const TOKYO_CENTER = {
@@ -74,7 +75,12 @@ const createPins = (pins) => {
 };
 
 getMap(() => {
-  getData((json) => {
-    createPins(json.slice(0, SIMILAR_AD_COUNT));
-  });
+  getData(
+    (json) => {
+      createPins(json.slice(0, SIMILAR_AD_COUNT));
+    },
+    (error) => showAlert(error),
+  );
 });
+
+export { TOKYO_CENTER, mapZoom, map, mainPinMarker };
