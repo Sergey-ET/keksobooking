@@ -38,6 +38,8 @@ const getRandomInteger = (min, max, accuracy = 0) => {
   return Number((Math.random() * (max - min) + min).toFixed(accuracy));
 };
 
+// Шаблон сообщения об ошибке в получении данных с сервера
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;

@@ -1,8 +1,8 @@
-const DATA = 'https://23.javascript.pages.academy/keksobooking/data';
-const SERVER = 'https://23.javascript.pages.academy/keksobooking';
+const SERVER_FROM = 'https://23.javascript.pages.academy/keksobooking/data';
+const SERVER_TO = 'https://23.javascript.pages.academy/keksobooking';
 
 const getData = (onSuccess, onFail) => {
-  return fetch(DATA)
+  fetch(SERVER_FROM)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -18,7 +18,7 @@ const getData = (onSuccess, onFail) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch(SERVER, {
+  fetch(SERVER_TO, {
     method: 'POST',
     body,
   })
