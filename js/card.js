@@ -5,6 +5,36 @@ const TYPES_IN_RUSSIAN = {
   bungalow: 'Бунгало',
 };
 
+const ROOM_DECLENSIONS = ['комната', 'комнаты', 'комнат'];
+const GUEST_DECLENSIONS = ['гостя', 'гостей'];
+
+const getRoomsDeclension = (n, text_forms) => {
+  n = Math.abs(n) % 100;
+  let n1 = n % 10;
+  if (n > 10 && n < 20) {
+    return text_forms[2];
+  }
+  if (n1 > 1 && n1 < 5) {
+    return text_forms[1];
+  }
+  if (n1 == 1) {
+    return text_forms[0];
+  }
+  return text_forms[2];
+};
+
+const getGuestsDeclension = (n, text_forms) => {
+  n = Math.abs(n) % 100;
+  let n1 = n % 20;
+  if (n1 > 1 && n1 < 20) {
+    return text_forms[1];
+  }
+  if (n1 == 1) {
+    return text_forms[0];
+  }
+  return text_forms[1];
+};
+
 const createFeatures = (features) => {
   const featuresFragment = document.createDocumentFragment();
   features.forEach((element) => {
@@ -43,7 +73,13 @@ const renderCard = ({ author, offer }) => {
     offer.price + ' ₽/ночь';
   card.querySelector('.popup__type').textContent = TYPES_IN_RUSSIAN[offer.type];
   card.querySelector('.popup__text--capacity').textContent =
-    offer.rooms + ' комнаты для ' + offer.guests + ' гостей';
+    offer.rooms +
+    ' ' +
+    getRoomsDeclension(offer.rooms, ROOM_DECLENSIONS) +
+    ' для ' +
+    offer.guests +
+    ' ' +
+    getGuestsDeclension(offer.guests, GUEST_DECLENSIONS);
   card.querySelector('.popup__text--time').textContent =
     'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
   card.querySelector('.popup__description').textContent = offer.description;
