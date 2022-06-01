@@ -82,3 +82,5 @@ getMap(() => {
     (error) => showAlert(error),
   );
 });
+
+export { TOKYO_CENTER, mapZoom, map, mainPinMarker };

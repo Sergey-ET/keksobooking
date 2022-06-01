@@ -1,3 +1,8 @@
+import { sendData } from './api.js';
+import { showAlert } from './util.js';
+import { TOKYO_CENTER, mapZoom, map, mainPinMarker } from './map.js';
+import { filter } from './filter.js';
+
 const COORDINATE_ACCURACY = 5;
 
 const TitleLength = {
@@ -23,6 +28,7 @@ const address = form.querySelector('#address');
 const titleInput = form.querySelector('#title');
 const roomNumber = form.querySelector('#room_number');
 const capacity = form.querySelector('#capacity');
+const resetButton = form.querySelector('.ad-form__reset');
 
 // Перевод формы в неактивное/активное состояние
 
@@ -149,6 +155,38 @@ const onRoomsPlacesNumberChange = () => {
 
 roomNumber.addEventListener('change', onRoomsPlacesNumberChange);
 capacity.addEventListener('change', onRoomsPlacesNumberChange);
+
+// Сброс всех полей формы, всех фильтров и приведение карты в первоначальное состояние
+
+const resetPage = () => {
+  form.reset();
+  filter.reset();
+  map.setView(TOKYO_CENTER, mapZoom);
+  mainPinMarker.setLatLng(TOKYO_CENTER);
+  getAddressCoordinates(TOKYO_CENTER);
+};
+
+// Сброс полей формы по нажатию кнопки сброса
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
+  resetPage();
+});
+
+// Отправка формы на сервер без перезагрузки страницы
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  sendData(
+    (success) => {
+      showAlert(success);
+      resetPage();
+    },
+    (error) => showAlert(error),
+    new FormData(evt.target),
+  );
+});
 
 // Экспорт данных
 
