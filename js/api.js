@@ -12,8 +12,8 @@ const getData = (onSuccess, onFail) => {
     .then((response) => {
       onSuccess(response);
     })
-    .catch((err) => {
-      onFail(`ОШИБКА ЗАГРУЗКИ ДАННЫХ - ${err}`);
+    .catch(() => {
+      onFail('ОШИБКА ЗАГРУЗКИ ДАННЫХ');
     });
 };
 

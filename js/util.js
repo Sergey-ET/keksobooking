@@ -62,4 +62,8 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export { getRandomIntInclusive, getRandomInteger, showAlert };
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
+export { getRandomIntInclusive, getRandomInteger, showAlert, isEscEvent };

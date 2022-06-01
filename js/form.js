@@ -1,7 +1,7 @@
 import { sendData } from './api.js';
-import { showAlert } from './util.js';
 import { TOKYO_CENTER, mapZoom, map, mainPinMarker } from './map.js';
 import { filter } from './filter.js';
+import { showSuccessPopup, showErrorPopup } from './popup.js';
 
 const COORDINATE_ACCURACY = 5;
 
@@ -167,6 +167,7 @@ const resetPage = () => {
 };
 
 // Сброс полей формы по нажатию кнопки сброса
+
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
@@ -179,11 +180,11 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   sendData(
-    (success) => {
-      showAlert(success);
+    () => {
+      showSuccessPopup();
       resetPage();
     },
-    (error) => showAlert(error),
+    showErrorPopup,
     new FormData(evt.target),
   );
 });
