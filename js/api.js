@@ -2,7 +2,7 @@ const DATA = 'https://23.javascript.pages.academy/keksobooking/data';
 const SERVER = 'https://23.javascript.pages.academy/keksobooking';
 
 const getData = (onSuccess, onFail) => {
-  fetch(DATA)
+  return fetch(DATA)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -13,7 +13,7 @@ const getData = (onSuccess, onFail) => {
       onSuccess(response);
     })
     .catch((err) => {
-      onFail(`Ошибка загрузки данных ${err}`);
+      onFail(`ОШИБКА ЗАГРУЗКИ ДАННЫХ - ${err}`);
     });
 };
 

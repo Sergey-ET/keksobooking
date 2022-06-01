@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 // Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
@@ -7,7 +9,7 @@ const getRandomIntInclusive = (min, max) => {
   }
 
   if (max <= min) {
-    [min, max] = [max, min]
+    [min, max] = [max, min];
   }
 
   min = Math.ceil(min);
@@ -25,7 +27,7 @@ const getRandomInteger = (min, max, accuracy = 0) => {
   }
 
   if (max <= min) {
-    [min, max] = [max, min]
+    [min, max] = [max, min];
   }
 
   if (accuracy === 0) {
@@ -36,4 +38,26 @@ const getRandomInteger = (min, max, accuracy = 0) => {
   return Number((Math.random() * (max - min) + min).toFixed(accuracy));
 };
 
-export {getRandomIntInclusive, getRandomInteger};
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '20px 10px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.color = 'white';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+export { getRandomIntInclusive, getRandomInteger, showAlert };
