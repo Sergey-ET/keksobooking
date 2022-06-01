@@ -3,6 +3,7 @@ const TYPES_IN_RUSSIAN = {
   flat: 'Квартира',
   house: 'Дом',
   bungalow: 'Бунгало',
+  hotel: 'Отель',
 };
 
 const ROOM_DECLENSIONS = ['комната', 'комнаты', 'комнат'];

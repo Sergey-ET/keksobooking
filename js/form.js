@@ -10,6 +10,7 @@ const MinPriceOfType = {
   flat: 1000,
   house: 5000,
   bungalow: 0,
+  hotel: 3000,
 };
 
 const form = document.querySelector('.ad-form');
