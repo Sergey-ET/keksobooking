@@ -1,16 +1,17 @@
-import * as L from '../leaflet/leaflet-src.esm.js';
 import { activateForm, getAddressCoordinates } from './form.js';
 import { activateFilter } from './filter.js';
 import { renderCard } from './card.js';
-import { createAds } from './data.js';
+import { getData } from './api.js';
 
+const L = window.L;
 const TOKYO_CENTER = {
   lat: 35.675,
   lng: 139.75,
 };
 
+const SIMILAR_AD_COUNT = 10;
+
 const mapZoom = 13;
-const pins = createAds();
 
 const mainPinIcon = L.icon({
   iconUrl: './img/pins/main-pin.svg',
@@ -24,18 +25,23 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-    activateForm();
-    activateFilter();
-    getAddressCoordinates(TOKYO_CENTER);
-  })
-  .setView(TOKYO_CENTER, mapZoom);
+const map = L.map('map-canvas');
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+const getMap = (callBackFunction) => {
+  map
+    .on('load', () => {
+      activateForm();
+      activateFilter();
+      getAddressCoordinates(TOKYO_CENTER);
+      callBackFunction();
+    })
+    .setView(TOKYO_CENTER, mapZoom);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+};
 
 const mainPinMarker = L.marker(TOKYO_CENTER, {
   draggable: true,
@@ -49,18 +55,26 @@ mainPinMarker.on('move', (evt) => {
   getAddressCoordinates(positions);
 });
 
-pins.forEach(({ offer, location, author }) => {
-  const pinMarker = L.marker(
-    {
-      lat: location.x,
-      lng: location.y,
-    },
-    {
-      icon: pinIcon,
-    },
-  );
+const createPins = (pins) => {
+  pins.forEach((data) => {
+    const pinMarker = L.marker(
+      {
+        lat: data.location.lat,
+        lng: data.location.lng,
+      },
+      {
+        icon: pinIcon,
+      },
+    );
 
-  pinMarker.addTo(map).bindPopup(renderCard({ offer, location, author }), {
-    keepInView: true,
+    pinMarker.addTo(map).bindPopup(renderCard(data), {
+      keepInView: true,
+    });
+  });
+};
+
+getMap(() => {
+  getData((json) => {
+    createPins(json.slice(0, SIMILAR_AD_COUNT));
   });
 });
