@@ -84,22 +84,17 @@ const checkGuests = (data) => {
   }
 };
 
-const checkFeatures = (data) => {
-  const checkedFilterFeatures = Array.from(
-    filterFeatures.querySelectorAll('.map__checkbox:checked'),
-  );
-  const offerFeatures = data.offer.features;
-  if (offerFeatures) {
-    return checkedFilterFeatures.every((feature) =>
-      offerFeatures.includes(feature.value),
-    );
-  }
-};
+const checkFeatures = (ad = []) => {
+  const selectedFeatures = [
+    ...filterFeatures.querySelectorAll('.map__checkbox'),
+  ]
+    .filter((featureElement) => featureElement.checked)
+    .map((featureElement) => featureElement.value);
 
-const changeFilters = (cb) => {
-  filter.addEventListener('change', () => {
-    cb();
-  });
+  return (
+    !selectedFeatures.length ||
+    selectedFeatures.every((feature) => ad.includes(feature))
+  );
 };
 
 const checkAllFilters = (data) =>
@@ -109,8 +104,14 @@ const checkAllFilters = (data) =>
       checkPrice(value) &&
       checkRooms(value) &&
       checkGuests(value) &&
-      checkFeatures(value),
+      checkFeatures(value.offer.features),
   );
+
+const changeFilters = (cb) => {
+  filter.addEventListener('change', () => {
+    cb();
+  });
+};
 
 // Экспорт
 

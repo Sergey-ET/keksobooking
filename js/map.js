@@ -32,7 +32,6 @@ const map = L.map('map-canvas');
 const getMap = (cb) => {
   map
     .on('load', () => {
-      activateForm();
       getAddressCoordinates(TOKYO_CENTER);
       cb();
     })
@@ -87,14 +86,15 @@ const removePins = () => {
 };
 
 getMap(() => {
+  activateForm();
   getData(
     (places) => {
-      activateFilter();
       createPins(places);
       changeFilters(() => {
         removePins();
         createPins(checkAllFilters(places));
       });
+      activateFilter();
     },
     (error) => showAlert(error),
   );
