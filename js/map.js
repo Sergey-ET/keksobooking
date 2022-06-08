@@ -2,7 +2,8 @@ import { activateForm, getAddressCoordinates } from './form.js';
 import { activateFilter } from './filter.js';
 import { renderCard } from './card.js';
 import { getData } from './api.js';
-import { showAlert } from './util.js';
+import { showAlert, debounce } from './util.js';
+import { checkAllFilters, changeFilters } from './filter.js';
 
 const L = window.L;
 const TOKYO_CENTER = {
@@ -11,6 +12,7 @@ const TOKYO_CENTER = {
 };
 
 const SIMILAR_AD_COUNT = 10;
+const RERENDER_DELAY = 500;
 
 const mapZoom = 13;
 
@@ -28,13 +30,11 @@ const pinIcon = L.icon({
 
 const map = L.map('map-canvas');
 
-const getMap = (callBackFunction) => {
+const getMap = (cb) => {
   map
     .on('load', () => {
-      activateForm();
-      activateFilter();
       getAddressCoordinates(TOKYO_CENTER);
-      callBackFunction();
+      cb();
     })
     .setView(TOKYO_CENTER, mapZoom);
 
@@ -56,31 +56,49 @@ mainPinMarker.on('move', (evt) => {
   getAddressCoordinates(positions);
 });
 
-const createPins = (pins) => {
-  pins.forEach((data) => {
-    const pinMarker = L.marker(
-      {
-        lat: data.location.lat,
-        lng: data.location.lng,
-      },
-      {
-        icon: pinIcon,
-      },
-    );
+const markers = [];
 
-    pinMarker.addTo(map).bindPopup(renderCard(data), {
-      keepInView: true,
-    });
+const addPinMarker = (place) => {
+  const pinMarker = L.marker(
+    {
+      lat: place.location.lat,
+      lng: place.location.lng,
+    },
+    {
+      icon: pinIcon,
+    },
+  );
+
+  pinMarker.addTo(map).bindPopup(renderCard(place), {
+    keepInView: true,
+  });
+
+  markers.push(pinMarker);
+};
+
+const createPins = (places) => {
+  places.slice(0, SIMILAR_AD_COUNT).forEach((place) => {
+    addPinMarker(place);
   });
 };
 
+const removePins = () => {
+  markers.forEach((marker) => marker.remove());
+};
+
 getMap(() => {
+  activateForm();
   getData(
-    (json) => {
-      createPins(json.slice(0, SIMILAR_AD_COUNT));
+    (places) => {
+      createPins(places);
+      changeFilters(debounce(() => {
+        removePins();
+        createPins(checkAllFilters(places));
+      }, RERENDER_DELAY));
+      activateFilter();
     },
     (error) => showAlert(error),
   );
 });
 
-export { TOKYO_CENTER, mapZoom, map, mainPinMarker };
+export { TOKYO_CENTER, mapZoom, map, mainPinMarker, removePins, createPins };
