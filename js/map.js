@@ -2,7 +2,7 @@ import { activateForm, getAddressCoordinates } from './form.js';
 import { activateFilter } from './filter.js';
 import { renderCard } from './card.js';
 import { getData } from './api.js';
-import { showAlert } from './util.js';
+import { showAlert, debounce } from './util.js';
 import { checkAllFilters, changeFilters } from './filter.js';
 
 const L = window.L;
@@ -12,6 +12,7 @@ const TOKYO_CENTER = {
 };
 
 const SIMILAR_AD_COUNT = 10;
+const RERENDER_DELAY = 500;
 
 const mapZoom = 13;
 
@@ -90,10 +91,10 @@ getMap(() => {
   getData(
     (places) => {
       createPins(places);
-      changeFilters(() => {
+      changeFilters(debounce(() => {
         removePins();
         createPins(checkAllFilters(places));
-      });
+      }, RERENDER_DELAY));
       activateFilter();
     },
     (error) => showAlert(error),

@@ -66,4 +66,25 @@ const isEscEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc';
 };
 
-export { getRandomIntInclusive, getRandomInteger, showAlert, isEscEvent };
+// Функция debounce для устранения 'дребезга'
+
+const debounce = (cb, delay) => {
+  let timeout;
+  return function () {
+    const cbCall = () => {
+      cb.apply(this, arguments);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(cbCall, delay);
+  };
+};
+
+// Экспорт
+
+export {
+  getRandomIntInclusive,
+  getRandomInteger,
+  showAlert,
+  isEscEvent,
+  debounce
+};
