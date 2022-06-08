@@ -29,6 +29,8 @@ const titleInput = form.querySelector('#title');
 const roomNumber = form.querySelector('#room_number');
 const capacity = form.querySelector('#capacity');
 const resetButton = form.querySelector('.ad-form__reset');
+const formInputs = form.querySelectorAll('input');
+const formSelects = form.querySelectorAll('select');
 
 // Перевод формы в неактивное/активное состояние
 
@@ -94,7 +96,7 @@ titleInput.addEventListener('input', () => {
         ' символов(-а)',
     );
   } else {
-    titleInput.style.borderColor = '#d9d9d3';
+    titleInput.style.borderColor = '';
     titleInput.setCustomValidity('');
   }
 
@@ -117,7 +119,7 @@ housingPrice.addEventListener('input', () => {
       'Максимальная цена за ночь - 1 000 000 руб.',
     );
   } else {
-    housingPrice.style.borderColor = '#d9d9d3';
+    housingPrice.style.borderColor = '';
     housingPrice.setCustomValidity('');
   }
 
@@ -146,7 +148,7 @@ const onRoomsPlacesNumberChange = () => {
     capacity.style.borderColor = 'red';
     capacity.setCustomValidity('Сто комнат не для гостей!');
   } else {
-    capacity.style.borderColor = '#d9d9d3';
+    capacity.style.borderColor = '';
     capacity.setCustomValidity('');
   }
 
@@ -160,6 +162,8 @@ capacity.addEventListener('change', onRoomsPlacesNumberChange);
 
 const resetPage = () => {
   form.reset();
+  formInputs.forEach((input) => input.style.borderColor = '');
+  formSelects.forEach((select) => select.style.borderColor = '');
   filter.reset();
   map.setView(TOKYO_CENTER, mapZoom);
   mainPinMarker.setLatLng(TOKYO_CENTER);
