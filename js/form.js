@@ -2,6 +2,7 @@ import { getData, sendData } from './api.js';
 import { TOKYO_CENTER, mapZoom, map, mainPinMarker, createPins, removePins } from './map.js';
 import { filter } from './filter.js';
 import { showSuccessPopup, showErrorPopup } from './popup.js';
+import { resetPictures } from './picture.js';
 
 const COORDINATE_ACCURACY = 5;
 
@@ -176,6 +177,7 @@ const resetPage = () => {
   resetPrice();
   removePins();
   getData((data) => createPins(data));
+  resetPictures();
 };
 
 // Сброс полей формы по нажатию кнопки сброса
