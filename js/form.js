@@ -85,15 +85,15 @@ titleInput.addEventListener('input', () => {
     titleInput.style.borderColor = 'red';
     titleInput.setCustomValidity(
       'Слишком короткий заголовок! Пожалуйста, добавьте ещё ' +
-        (TitleLength.MIN - valueLength) +
-        ' символов(-а)',
+      (TitleLength.MIN - valueLength) +
+      ' символов(-а)',
     );
   } else if (valueLength > TitleLength.MAX) {
     titleInput.style.borderColor = 'red';
     titleInput.setCustomValidity(
       'Слишком длинный заголовок! Пожалуйста, удалите лишние ' +
-        (valueLength - TitleLength.MAX) +
-        ' символов(-а)',
+      (valueLength - TitleLength.MAX) +
+      ' символов(-а)',
     );
   } else {
     titleInput.style.borderColor = '';
@@ -110,8 +110,8 @@ housingPrice.addEventListener('input', () => {
     housingPrice.style.borderColor = 'red';
     housingPrice.setCustomValidity(
       'Минимальная цена за ночь - ' +
-        MinPriceOfType[housingType.value] +
-        ' руб.',
+      MinPriceOfType[housingType.value] +
+      ' руб.',
     );
   } else if (housingPrice.value > 1000000) {
     housingPrice.style.borderColor = 'red';
@@ -160,6 +160,11 @@ capacity.addEventListener('change', onRoomsPlacesNumberChange);
 
 // Сброс всех полей формы, всех фильтров и приведение карты в первоначальное состояние
 
+const resetPrice = () => {
+  housingPrice.min = MinPriceOfType[housingType.value];
+  housingPrice.placeholder = MinPriceOfType[housingType.value];
+}
+
 const resetPage = () => {
   form.reset();
   formInputs.forEach((input) => input.style.borderColor = '');
@@ -168,6 +173,7 @@ const resetPage = () => {
   map.setView(TOKYO_CENTER, mapZoom);
   mainPinMarker.setLatLng(TOKYO_CENTER);
   getAddressCoordinates(TOKYO_CENTER);
+  resetPrice();
 };
 
 // Сброс полей формы по нажатию кнопки сброса
