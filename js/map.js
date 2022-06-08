@@ -101,4 +101,4 @@ getMap(() => {
   );
 });
 
-export { TOKYO_CENTER, mapZoom, map, mainPinMarker };
+export { TOKYO_CENTER, mapZoom, map, mainPinMarker, removePins, createPins };

@@ -1,5 +1,5 @@
-import { sendData } from './api.js';
-import { TOKYO_CENTER, mapZoom, map, mainPinMarker } from './map.js';
+import { getData, sendData } from './api.js';
+import { TOKYO_CENTER, mapZoom, map, mainPinMarker, createPins, removePins } from './map.js';
 import { filter } from './filter.js';
 import { showSuccessPopup, showErrorPopup } from './popup.js';
 
@@ -174,6 +174,8 @@ const resetPage = () => {
   mainPinMarker.setLatLng(TOKYO_CENTER);
   getAddressCoordinates(TOKYO_CENTER);
   resetPrice();
+  removePins();
+  getData((data) => createPins(data));
 };
 
 // Сброс полей формы по нажатию кнопки сброса
