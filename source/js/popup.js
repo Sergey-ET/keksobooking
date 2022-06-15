@@ -1,16 +1,11 @@
 import { isEscEvent } from './util.js';
 
-const body = document.querySelector('body');
-const successPopupTemplate = document
-  .querySelector('#success')
-  .content.querySelector('.success');
-const errorPopupTemplate = document
-  .querySelector('#error')
-  .content.querySelector('.error');
+const successPopupTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorPopupTemplate = document.querySelector('#error').content.querySelector('.error');
 
 const showSuccessPopup = () => {
   const successPopup = successPopupTemplate.cloneNode(true);
-  body.appendChild(successPopup);
+  document.body.appendChild(successPopup);
 
   document.addEventListener('keydown', (evt) => {
     if (isEscEvent(evt)) {
@@ -27,7 +22,7 @@ const showSuccessPopup = () => {
 const showErrorPopup = () => {
   const errorPopup = errorPopupTemplate.cloneNode(true);
   const errorButton = errorPopup.querySelector('.error__button');
-  body.appendChild(errorPopup);
+  document.body.appendChild(errorPopup);
 
   errorButton.addEventListener('click', (evt) => {
     evt.preventDefault();

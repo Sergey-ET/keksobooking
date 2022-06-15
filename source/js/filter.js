@@ -110,6 +110,12 @@ const changeFilters = (cb) => {
   });
 };
 
+// Сброс фильтров
+
+const resetFilter = () => {
+  filter.reset();
+};
+
 // Экспорт
 
-export { deactivateFilter, activateFilter, filter, checkAllFilters, changeFilters };
+export { activateFilter, resetFilter, checkAllFilters, changeFilters };

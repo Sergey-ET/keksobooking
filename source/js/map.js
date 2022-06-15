@@ -85,6 +85,12 @@ const removePins = () => {
   markers.forEach((marker) => marker.remove());
 };
 
+const resetMap = () => {
+  map.setView(TOKYO_CENTER, MAP_ZOOM);
+  mainPinMarker.setLatLng(TOKYO_CENTER);
+  getAddressCoordinates(TOKYO_CENTER);
+};
+
 getMap(() => {
   activateForm();
   getData(
@@ -100,4 +106,4 @@ getMap(() => {
   );
 });
 
-export { TOKYO_CENTER, MAP_ZOOM, map, mainPinMarker, removePins, createPins };
+export { removePins, createPins, resetMap };

@@ -1,6 +1,6 @@
 import { getData, sendData } from './api.js';
-import { TOKYO_CENTER, MAP_ZOOM, map, mainPinMarker, createPins, removePins } from './map.js';
-import { filter } from './filter.js';
+import { createPins, removePins, resetMap } from './map.js';
+import { resetFilter } from './filter.js';
 import { showSuccessPopup, showErrorPopup } from './popup.js';
 import { resetPictures } from './picture.js';
 
@@ -166,14 +166,16 @@ const resetPrice = () => {
   housingPrice.placeholder = MinPriceOfType[housingType.value];
 }
 
-const resetPage = () => {
+const resetForm = () => {
   form.reset();
   formInputs.forEach((input) => input.style.borderColor = '');
   formSelects.forEach((select) => select.style.borderColor = '');
-  filter.reset();
-  map.setView(TOKYO_CENTER, MAP_ZOOM);
-  mainPinMarker.setLatLng(TOKYO_CENTER);
-  getAddressCoordinates(TOKYO_CENTER);
+}
+
+const resetPage = () => {
+  resetFilter();
+  resetForm();
+  resetMap();
   resetPrice();
   removePins();
   getData((data) => createPins(data));
@@ -205,4 +207,4 @@ form.addEventListener('submit', (evt) => {
 
 // Экспорт данных
 
-export { deactivateForm, activateForm, getAddressCoordinates };
+export { activateForm, getAddressCoordinates };
