@@ -13,8 +13,7 @@ const TOKYO_CENTER = {
 
 const SIMILAR_AD_COUNT = 10;
 const RERENDER_DELAY = 500;
-
-const mapZoom = 13;
+const MAP_ZOOM = 13;
 
 const mainPinIcon = L.icon({
   iconUrl: './img/pins/main-pin.svg',
@@ -36,7 +35,7 @@ const getMap = (cb) => {
       getAddressCoordinates(TOKYO_CENTER);
       cb();
     })
-    .setView(TOKYO_CENTER, mapZoom);
+    .setView(TOKYO_CENTER, MAP_ZOOM);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
@@ -101,4 +100,4 @@ getMap(() => {
   );
 });
 
-export { TOKYO_CENTER, mapZoom, map, mainPinMarker, removePins, createPins };
+export { TOKYO_CENTER, MAP_ZOOM, map, mainPinMarker, removePins, createPins };

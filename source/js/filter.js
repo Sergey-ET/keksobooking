@@ -40,45 +40,44 @@ const activateFilter = () => {
 
 // Программирование фильтров
 
-const checkType = (data) => {
-  return (
-    filterType.value === data.offer.type || filterType.value === DEFAULT_VALUE
-  );
-};
+const checkType = (data) => filterType.value === data.offer.type || filterType.value === DEFAULT_VALUE;
 
 const checkPrice = (data) => {
-  if (filterPrice.value === 'low') {
-    return data.offer.price < Prices.MIN;
-  } else if (filterPrice.value === 'middle') {
-    return data.offer.price >= Prices.MIN && data.offer.price <= Prices.MAX;
-  } else if (filterPrice.value === 'high') {
-    return data.offer.price > Prices.MAX;
-  } else {
-    return filterPrice.value === DEFAULT_VALUE;
+  switch (filterPrice.value) {
+    case 'low':
+      return data.offer.price < Prices.MIN;
+    case 'middle':
+      return data.offer.price >= Prices.MIN && data.offer.price <= Prices.MAX;
+    case 'high':
+      return data.offer.price > Prices.MAX;
+    default:
+      return filterPrice.value === DEFAULT_VALUE;
   }
 };
 
 const checkRooms = (data) => {
-  if (filterRooms.value === '1') {
-    return data.offer.rooms === 1;
-  } else if (filterRooms.value === '2') {
-    return data.offer.rooms === 2;
-  } else if (filterRooms.value === '3') {
-    return data.offer.rooms === 3;
-  } else {
-    return filterRooms.value === DEFAULT_VALUE;
+  switch (filterRooms.value) {
+    case '1':
+      return data.offer.rooms === 1;
+    case '2':
+      return data.offer.rooms === 2;
+    case '3':
+      return data.offer.rooms === 3;
+    default:
+      return filterRooms.value === DEFAULT_VALUE;
   }
 };
 
 const checkGuests = (data) => {
-  if (filterGuests.value === '1') {
-    return data.offer.guests === 1;
-  } else if (filterGuests.value === '2') {
-    return data.offer.guests === 2;
-  } else if (filterGuests.value === '0') {
-    return data.offer.guests === 0;
-  } else {
-    return filterGuests.value === DEFAULT_VALUE;
+  switch (filterGuests.value) {
+    case '1':
+      return data.offer.guests === 1;
+    case '2':
+      return data.offer.guests === 2;
+    case '0':
+      return data.offer.guests === 0;
+    default:
+      return filterGuests.value === DEFAULT_VALUE;
   }
 };
 

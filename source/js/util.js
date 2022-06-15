@@ -24,9 +24,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const isEscEvent = (evt) => {
-  return evt.key === 'Escape' || evt.key === 'Esc';
-};
+const isEscEvent = (evt) => evt.key === ('Escape' || 'Esc');
 
 // Функция debounce для устранения 'дребезга'
 
