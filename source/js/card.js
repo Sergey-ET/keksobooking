@@ -18,7 +18,7 @@ const getRoomsDeclension = (n, text_forms) => {
   if (n1 > 1 && n1 < 5) {
     return text_forms[1];
   }
-  if (n1 == 1) {
+  if (n1 === 1) {
     return text_forms[0];
   }
   return text_forms[2];
@@ -30,7 +30,7 @@ const getGuestsDeclension = (n, text_forms) => {
   if (n1 > 1 && n1 < 20) {
     return text_forms[1];
   }
-  if (n1 == 1) {
+  if (n1 === 1) {
     return text_forms[0];
   }
   return text_forms[1];

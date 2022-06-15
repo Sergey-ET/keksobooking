@@ -43,8 +43,4 @@ const debounce = (cb, delay) => {
 
 // Экспорт
 
-export {
-  showAlert,
-  isEscEvent,
-  debounce
-};
+export { showAlert, isEscEvent, debounce };

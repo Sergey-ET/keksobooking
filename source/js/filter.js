@@ -38,8 +38,6 @@ const activateFilter = () => {
   }
 };
 
-export { deactivateFilter, activateFilter, filter };
-
 // Программирование фильтров
 
 const checkType = (data) => {
@@ -115,4 +113,4 @@ const changeFilters = (cb) => {
 
 // Экспорт
 
-export { checkAllFilters, changeFilters };
+export { deactivateFilter, activateFilter, filter, checkAllFilters, changeFilters };
