@@ -2,7 +2,7 @@
 
 <img align="left" width="50" height="50" alt="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/javascript/logo-for-github-2.png">
 
-Training project at asynchronous course "Profession "Frontend Developer", HTML Academy
+Training project at asynchronous course "Profession "Frontend Developer" by HTML Academy. Project was done in June 2022.
 
 Project completed by Sergey Troshkin
 
