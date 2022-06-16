@@ -1,10 +1,10 @@
 import { isEscEvent } from './util.js';
 
-const successPopupTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorPopupTemplate = document.querySelector('#error').content.querySelector('.error');
+const successPopup = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+const errorPopup = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
+const errorButton = errorPopup.querySelector('.error__button');
 
 const showSuccessPopup = () => {
-  const successPopup = successPopupTemplate.cloneNode(true);
   document.body.appendChild(successPopup);
 
   const onPopupEscKeydown = (evt) => {
@@ -24,8 +24,6 @@ const showSuccessPopup = () => {
 };
 
 const showErrorPopup = () => {
-  const errorPopup = errorPopupTemplate.cloneNode(true);
-  const errorButton = errorPopup.querySelector('.error__button');
   document.body.appendChild(errorPopup);
 
   const onPopupEscKeydown = (evt) => {
