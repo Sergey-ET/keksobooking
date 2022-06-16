@@ -3,11 +3,7 @@
 <img align="left" width="50" height="50" alt="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/javascript/logo-for-github-2.png">
 
 Training project at asynchronous course "Profession "Frontend Developer", HTML Academy
-
-
-## Project completed by
-
-* Sergey Troshkin
+Project completed by Sergey Troshkin
 
 ## Project start and build
 
