@@ -4,7 +4,9 @@
 
 Training project at asynchronous course "Profession "Frontend Developer", HTML Academy
 
-* Project completed by Sergey Troshkin
+## Project completed by
+
+* Sergey Troshkin
 
 ## Project start and build
 
