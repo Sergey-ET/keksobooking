@@ -83,7 +83,6 @@ const renderCard = ({ author, offer }) => {
     getGuestsDeclension(offer.guests, GUEST_DECLENSIONS);
   card.querySelector('.popup__text--time').textContent =
     'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
-  card.querySelector('.popup__description').textContent = offer.description;
 
   const cardFeatures = card.querySelector('.popup__features');
   cardFeatures.innerHTML = '';
@@ -92,6 +91,13 @@ const renderCard = ({ author, offer }) => {
     cardFeatures.appendChild(newFeatureElements);
   } else {
     cardFeatures.remove();
+  }
+
+  const cardDescription = card.querySelector('.popup__description');
+  if (offer.description) {
+    cardDescription.textContent = offer.description;
+  } else {
+    cardDescription.remove();
   }
 
   const cardPhotos = card.querySelector('.popup__photos');
