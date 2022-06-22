@@ -85,12 +85,11 @@ const checkFeatures = (ad = []) => {
   const selectedFeatures = [
     ...filterFeatures.querySelectorAll('.map__checkbox'),
   ]
-    .filter((featureElement) => featureElement.checked)
-    .map((featureElement) => featureElement.value);
+    .filter((featureElement) => featureElement.checked);
 
   return (
     !selectedFeatures.length ||
-    selectedFeatures.every((feature) => ad.includes(feature))
+    selectedFeatures.every((feature) => ad.includes(feature.value))
   );
 };
 
