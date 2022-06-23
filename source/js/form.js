@@ -38,7 +38,7 @@ const formSelects = form.querySelectorAll('select');
 const deactivateForm = () => {
   form.classList.add('ad-form--disabled');
   for (let i = 0; i < formFieldsets.length; i++) {
-    formFieldsets[i].setAttribute('disabled', 'disabled');
+    formFieldsets[i].disabled = true;
   }
 };
 
@@ -47,7 +47,7 @@ deactivateForm();
 const activateForm = () => {
   form.classList.remove('ad-form--disabled');
   for (let i = 0; i < formFieldsets.length; i++) {
-    formFieldsets[i].removeAttribute('disabled');
+    formFieldsets[i].disabled = false;
   }
 };
 

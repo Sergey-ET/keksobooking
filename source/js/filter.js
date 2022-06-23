@@ -19,10 +19,10 @@ const filterFeatures = filter.querySelector('#housing-features');
 const deactivateFilter = () => {
   filter.classList.add('map__filters--disabled');
   for (let i = 0; i < filterSelects.length; i++) {
-    filterSelects[i].setAttribute('disabled', 'disabled');
+    filterSelects[i].disabled = true;
   }
   for (let i = 0; i < filterFieldsets.length; i++) {
-    filterFieldsets[i].setAttribute('disabled', 'disabled');
+    filterFieldsets[i].disabled = true;
   }
 };
 
@@ -31,10 +31,10 @@ deactivateFilter();
 const activateFilter = () => {
   filter.classList.remove('map__filters--disabled');
   for (let i = 0; i < filterSelects.length; i++) {
-    filterSelects[i].removeAttribute('disabled');
+    filterSelects[i].disabled = false;
   }
   for (let i = 0; i < filterFieldsets.length; i++) {
-    filterFieldsets[i].removeAttribute('disabled');
+    filterFieldsets[i].disabled = false;
   }
 };
 
