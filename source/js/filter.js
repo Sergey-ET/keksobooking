@@ -6,8 +6,7 @@ const Prices = {
 };
 
 const filter = document.querySelector('.map__filters');
-const filterSelects = filter.querySelectorAll('.map__filters select');
-const filterFieldsets = filter.querySelectorAll('.map__filters fieldset');
+const filterElement = filter.querySelectorAll('select, fieldset');
 const filterType = filter.querySelector('#housing-type');
 const filterPrice = filter.querySelector('#housing-price');
 const filterRooms = filter.querySelector('#housing-rooms');
@@ -18,11 +17,8 @@ const filterFeatures = filter.querySelector('#housing-features');
 
 const deactivateFilter = () => {
   filter.classList.add('map__filters--disabled');
-  for (let i = 0; i < filterSelects.length; i++) {
-    filterSelects[i].disabled = true;
-  }
-  for (let i = 0; i < filterFieldsets.length; i++) {
-    filterFieldsets[i].disabled = true;
+  for (let i = 0; i < filterElement.length; i++) {
+    filterElement[i].disabled = true;
   }
 };
 
@@ -30,11 +26,8 @@ deactivateFilter();
 
 const activateFilter = () => {
   filter.classList.remove('map__filters--disabled');
-  for (let i = 0; i < filterSelects.length; i++) {
-    filterSelects[i].disabled = false;
-  }
-  for (let i = 0; i < filterFieldsets.length; i++) {
-    filterFieldsets[i].disabled = false;
+  for (let i = 0; i < filterElement.length; i++) {
+    filterElement[i].disabled = false;
   }
 };
 
