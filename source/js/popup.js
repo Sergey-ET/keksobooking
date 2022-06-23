@@ -3,6 +3,12 @@ import { isEscEvent } from './util.js';
 const successPopup = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
 const errorPopup = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const errorButton = errorPopup.querySelector('.error__button');
+const onDocumentKeydownAdd = (evt, cb) => {
+  document.addEventListener(evt, cb);
+};
+const onDocumentKeydownRemove = (evt, cb) => {
+  document.removeEventListener(evt, cb);
+};
 
 const showSuccessPopup = () => {
   document.body.appendChild(successPopup);
@@ -15,11 +21,11 @@ const showSuccessPopup = () => {
     }
   };
 
-  document.addEventListener('keydown', onPopupEscKeydown);
+  onDocumentKeydownAdd('keydown', onPopupEscKeydown);
 
   successPopup.addEventListener('click', () => {
     successPopup.remove();
-    document.removeEventListener('keydown', onPopupEscKeydown);
+    onDocumentKeydownRemove('keydown', onPopupEscKeydown);
   });
 };
 
@@ -34,16 +40,16 @@ const showErrorPopup = () => {
     }
   };
 
-  document.addEventListener('keydown', onPopupEscKeydown);
+  onDocumentKeydownAdd('keydown', onPopupEscKeydown);
 
   errorButton.addEventListener('click', () => {
     errorPopup.remove();
-    document.removeEventListener('keydown', onPopupEscKeydown);
+    onDocumentKeydownRemove('keydown', onPopupEscKeydown);
   });
 
   errorPopup.addEventListener('click', () => {
     errorPopup.remove();
-    document.removeEventListener('keydown', onPopupEscKeydown);
+    onDocumentKeydownRemove('keydown', onPopupEscKeydown);
   });
 };
 
