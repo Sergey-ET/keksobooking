@@ -6,7 +6,7 @@ const Prices = {
 };
 
 const filter = document.querySelector('.map__filters');
-const filterElement = filter.querySelectorAll('select, fieldset');
+const filterElements = filter.querySelectorAll('select, fieldset');
 const filterType = filter.querySelector('#housing-type');
 const filterPrice = filter.querySelector('#housing-price');
 const filterRooms = filter.querySelector('#housing-rooms');
@@ -17,18 +17,18 @@ const filterFeatures = filter.querySelector('#housing-features');
 
 const deactivateFilter = () => {
   filter.classList.add('map__filters--disabled');
-  for (let i = 0; i < filterElement.length; i++) {
-    filterElement[i].disabled = true;
-  }
+  filterElements.forEach((filterElement) => {
+    filterElement.disabled = true;
+  });
 };
 
 deactivateFilter();
 
 const activateFilter = () => {
   filter.classList.remove('map__filters--disabled');
-  for (let i = 0; i < filterElement.length; i++) {
-    filterElement[i].disabled = false;
-  }
+  filterElements.forEach((filterElement) => {
+    filterElement.disabled = false;
+  });
 };
 
 // Программирование фильтров

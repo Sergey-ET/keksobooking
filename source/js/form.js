@@ -37,18 +37,18 @@ const formSelects = form.querySelectorAll('select');
 
 const deactivateForm = () => {
   form.classList.add('ad-form--disabled');
-  for (let i = 0; i < formFieldsets.length; i++) {
-    formFieldsets[i].disabled = true;
-  }
+  formFieldsets.forEach((formFieldset) => {
+    formFieldset.disabled = true;
+  });
 };
 
 deactivateForm();
 
 const activateForm = () => {
   form.classList.remove('ad-form--disabled');
-  for (let i = 0; i < formFieldsets.length; i++) {
-    formFieldsets[i].disabled = false;
-  }
+  formFieldsets.forEach((formFieldset) => {
+    formFieldset.disabled = false;
+  });
 };
 
 // Обработка пользовательского ввода для полей «Тип жилья» и «Цена за ночь»
