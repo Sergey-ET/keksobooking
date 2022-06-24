@@ -1,3 +1,5 @@
+import { getDeclension } from './util.js';
+
 const TYPES_IN_RUSSIAN = {
   palace: 'Дворец',
   flat: 'Квартира',
@@ -6,35 +8,8 @@ const TYPES_IN_RUSSIAN = {
   hotel: 'Отель',
 };
 
-const ROOM_DECLENSIONS = ['комната', 'комнаты', 'комнат'];
-const GUEST_DECLENSIONS = ['гостя', 'гостей'];
-
-const getRoomsDeclension = (n, text_forms) => {
-  n = Math.abs(n) % 100;
-  let n1 = n % 10;
-  if (n > 10 && n < 20) {
-    return text_forms[2];
-  }
-  if (n1 > 1 && n1 < 5) {
-    return text_forms[1];
-  }
-  if (n1 === 1) {
-    return text_forms[0];
-  }
-  return text_forms[2];
-};
-
-const getGuestsDeclension = (n, text_forms) => {
-  n = Math.abs(n) % 100;
-  let n1 = n % 20;
-  if (n1 > 1 && n1 < 20) {
-    return text_forms[1];
-  }
-  if (n1 === 1) {
-    return text_forms[0];
-  }
-  return text_forms[1];
-};
+const ROOM_DECLENSIONS = [' комната для ', ' комнаты для ', ' комнат для '];
+const GUEST_DECLENSIONS = [' гостя', ' гостей', ' гостей'];
 
 const createFeatures = (features) => {
   const featuresFragment = document.createDocumentFragment();
@@ -75,12 +50,9 @@ const renderCard = ({ author, offer }) => {
   card.querySelector('.popup__type').textContent = TYPES_IN_RUSSIAN[offer.type];
   card.querySelector('.popup__text--capacity').textContent =
     offer.rooms +
-    ' ' +
-    getRoomsDeclension(offer.rooms, ROOM_DECLENSIONS) +
-    ' для ' +
+    getDeclension(offer.rooms, ROOM_DECLENSIONS) +
     offer.guests +
-    ' ' +
-    getGuestsDeclension(offer.guests, GUEST_DECLENSIONS);
+    getDeclension(offer.guests, GUEST_DECLENSIONS);
   card.querySelector('.popup__text--time').textContent =
     'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
 
