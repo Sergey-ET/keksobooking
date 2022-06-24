@@ -11,30 +11,6 @@ const TYPES_IN_RUSSIAN = {
 const ROOM_DECLENSIONS = [' комната для ', ' комнаты для ', ' комнат для '];
 const GUEST_DECLENSIONS = [' гостя', ' гостей', ' гостей'];
 
-const createFeatures = (features) => {
-  const featuresFragment = document.createDocumentFragment();
-  features.forEach((element) => {
-    const feature = document.createElement('li');
-    feature.classList.add('popup__feature', `popup__feature--${element}`);
-    featuresFragment.appendChild(feature);
-  });
-  return featuresFragment;
-};
-
-const createPhotos = (photos) => {
-  const photosFragment = document.createDocumentFragment();
-  photos.forEach((photoSrc) => {
-    const newPhoto = document.createElement('img');
-    newPhoto.src = photoSrc;
-    newPhoto.classList.add('popup__photo');
-    newPhoto.alt = 'Фотография жилья';
-    newPhoto.width = '45';
-    newPhoto.height = '40';
-    photosFragment.appendChild(newPhoto);
-  });
-  return photosFragment;
-};
-
 const cardTemplate = document
   .querySelector('#card')
   .content.querySelector('.popup');
@@ -53,8 +29,11 @@ const renderCard = ({ author, offer }) => {
   const cardFeatures = card.querySelector('.popup__features');
   cardFeatures.innerHTML = '';
   if (offer.features) {
-    const newFeatureElements = createFeatures(offer.features);
-    cardFeatures.appendChild(newFeatureElements);
+    offer.features.forEach((element) => {
+      const feature = document.createElement('li');
+      feature.classList.add('popup__feature', `popup__feature--${element}`);
+      cardFeatures.appendChild(feature);
+    });
   } else {
     cardFeatures.remove();
   }
@@ -67,10 +46,14 @@ const renderCard = ({ author, offer }) => {
   }
 
   const cardPhotos = card.querySelector('.popup__photos');
+  const cardPhoto = cardPhotos.querySelector('.popup__photo');
   cardPhotos.innerHTML = '';
   if (offer.photos) {
-    const newPhotoElements = createPhotos(offer.photos);
-    cardPhotos.appendChild(newPhotoElements);
+    offer.photos.forEach((photoSrc) => {
+      const newPhoto = cardPhoto.cloneNode(true);
+      newPhoto.src = photoSrc;
+      cardPhotos.appendChild(newPhoto);
+    });
   } else {
     cardPhotos.remove();
   }
