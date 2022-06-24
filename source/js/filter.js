@@ -13,8 +13,6 @@ const filterRooms = filter.querySelector('#housing-rooms');
 const filterGuests = filter.querySelector('#housing-guests');
 const filterFeatures = filter.querySelector('#housing-features');
 
-// Перевод фильтров в неактивное/активное состояние
-
 const deactivateFilter = () => {
   filter.classList.add('map__filters--disabled');
   filterElements.forEach((filterElement) => {
@@ -30,8 +28,6 @@ const activateFilter = () => {
     filterElement.disabled = false;
   });
 };
-
-// Программирование фильтров
 
 const checkType = (data) => filterType.value === data.offer.type || filterType.value === DEFAULT_VALUE;
 
@@ -80,12 +76,8 @@ const changeFilters = (cb) => {
   });
 };
 
-// Сброс фильтров
-
 const resetFilter = () => {
   filter.reset();
 };
-
-// Экспорт
 
 export { activateFilter, resetFilter, checkAllFilters, changeFilters };

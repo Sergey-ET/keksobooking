@@ -34,8 +34,6 @@ const resetButton = form.querySelector('.ad-form__reset');
 const formInputs = form.querySelectorAll('input');
 const formSelects = form.querySelectorAll('select');
 
-// Перевод формы в неактивное/активное состояние
-
 const deactivateForm = () => {
   form.classList.add('ad-form--disabled');
   formFieldsets.forEach((formFieldset) => {
@@ -52,14 +50,10 @@ const activateForm = () => {
   });
 };
 
-// Обработка пользовательского ввода для полей «Тип жилья» и «Цена за ночь»
-
 housingType.addEventListener('change', () => {
   housingPrice.min = MinPriceOfType[housingType.value];
   housingPrice.placeholder = MinPriceOfType[housingType.value];
 });
-
-// Обработка пользовательского ввода для полей «Время заезда» и «Время выезда»
 
 timeIn.addEventListener('change', () => {
   timeOut.value = timeIn.value;
@@ -69,16 +63,12 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-// Заполнение поля адреса координатами
-
 const getAddressCoordinates = (coordinates) => {
   address.value =
     coordinates.lat.toFixed(COORDINATE_ACCURACY) +
     ', ' +
     coordinates.lng.toFixed(COORDINATE_ACCURACY);
 };
-
-// Валидация поля заголовка
 
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
@@ -105,8 +95,6 @@ titleInput.addEventListener('input', () => {
   titleInput.reportValidity();
 });
 
-// Валидация поля c ценой
-
 housingPrice.addEventListener('input', () => {
   if (housingPrice.value < MinPriceOfType[housingType.value]) {
     housingPrice.style.borderColor = 'red';
@@ -127,8 +115,6 @@ housingPrice.addEventListener('input', () => {
 
   housingPrice.reportValidity();
 });
-
-// Обработка пользовательского ввода для полей «Количество комнат» и «Количество мест»
 
 const onRoomsPlacesNumberChange = () => {
   if (roomNumber.value === '1' && capacity.value !== '1') {
@@ -160,8 +146,6 @@ const onRoomsPlacesNumberChange = () => {
 roomNumber.addEventListener('change', onRoomsPlacesNumberChange);
 capacity.addEventListener('change', onRoomsPlacesNumberChange);
 
-// Сброс всех полей формы, всех фильтров и приведение карты в первоначальное состояние
-
 const resetPrice = () => {
   housingPrice.min = MinPriceOfType[housingType.value];
   housingPrice.placeholder = MinPriceOfType[housingType.value];
@@ -183,15 +167,11 @@ const resetPage = () => {
   resetPictures();
 };
 
-// Сброс полей формы по нажатию кнопки сброса
-
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
   resetPage();
 });
-
-// Отправка формы на сервер без перезагрузки страницы
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -205,7 +185,5 @@ form.addEventListener('submit', (evt) => {
     new FormData(evt.target),
   );
 });
-
-// Экспорт данных
 
 export { activateForm, getAddressCoordinates };

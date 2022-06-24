@@ -1,7 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
 
-// Шаблон сообщения об ошибке в получении данных с сервера
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
@@ -26,8 +24,6 @@ const showAlert = (message) => {
 
 const isEscEvent = (evt) => evt.key === ('Escape' || 'Esc');
 
-// Функция debounce для устранения 'дребезга'
-
 const debounce = (cb, delay) => {
   let timeout;
   return function () {
@@ -39,10 +35,6 @@ const debounce = (cb, delay) => {
   };
 };
 
-// Функция для определения правильного склонения
-
 const getDeclension = (number, txt, cases = [2, 0, 1, 1, 1, 2]) => txt[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-
-// Экспорт
 
 export { showAlert, isEscEvent, debounce, getDeclension };
