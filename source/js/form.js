@@ -5,6 +5,7 @@ import { showSuccessPopup, showErrorPopup } from './popup.js';
 import { resetPictures } from './picture.js';
 
 const COORDINATE_ACCURACY = 5;
+const MAX_HOUSING_PRICE = 1000000;
 
 const TitleLength = {
   MIN: 30,
@@ -12,11 +13,11 @@ const TitleLength = {
 };
 
 const MinPriceOfType = {
-  palace: 10000,
-  flat: 1000,
-  house: 5000,
   bungalow: 0,
+  flat: 1000,
   hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const form = document.querySelector('.ad-form');
@@ -114,7 +115,7 @@ housingPrice.addEventListener('input', () => {
       MinPriceOfType[housingType.value] +
       ' руб.',
     );
-  } else if (housingPrice.value > 1000000) {
+  } else if (housingPrice.value > MAX_HOUSING_PRICE) {
     housingPrice.style.borderColor = 'red';
     housingPrice.setCustomValidity(
       'Максимальная цена за ночь - 1 000 000 руб.',
