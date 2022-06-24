@@ -48,31 +48,9 @@ const checkPrice = (data) => {
   }
 };
 
-const checkRooms = (data) => {
-  switch (filterRooms.value) {
-    case '1':
-      return data.offer.rooms === 1;
-    case '2':
-      return data.offer.rooms === 2;
-    case '3':
-      return data.offer.rooms === 3;
-    default:
-      return filterRooms.value === DEFAULT_VALUE;
-  }
-};
+const checkRooms = (data) => data.offer.rooms === +filterRooms.value || filterRooms.value === DEFAULT_VALUE;
 
-const checkGuests = (data) => {
-  switch (filterGuests.value) {
-    case '1':
-      return data.offer.guests === 1;
-    case '2':
-      return data.offer.guests === 2;
-    case '0':
-      return data.offer.guests === 0;
-    default:
-      return filterGuests.value === DEFAULT_VALUE;
-  }
-};
+const checkGuests = (data) => data.offer.guests === +filterGuests.value || filterGuests.value === DEFAULT_VALUE;
 
 const checkFeatures = (ad = []) => {
   const selectedFeatures = [
