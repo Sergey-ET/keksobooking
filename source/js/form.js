@@ -64,10 +64,7 @@ timeOut.addEventListener('change', () => {
 });
 
 const getAddressCoordinates = (coordinates) => {
-  address.value =
-    coordinates.lat.toFixed(COORDINATE_ACCURACY) +
-    ', ' +
-    coordinates.lng.toFixed(COORDINATE_ACCURACY);
+  address.value = `${coordinates.lat.toFixed(COORDINATE_ACCURACY)}, ${coordinates.lng.toFixed(COORDINATE_ACCURACY)}`;
 };
 
 titleInput.addEventListener('input', () => {
@@ -76,16 +73,12 @@ titleInput.addEventListener('input', () => {
   if (valueLength < TitleLength.MIN) {
     titleInput.style.borderColor = 'red';
     titleInput.setCustomValidity(
-      'Слишком короткий заголовок! Пожалуйста, добавьте ещё ' +
-      (TitleLength.MIN - valueLength) +
-      ' символов(-а)',
+      `Слишком короткий заголовок! Пожалуйста, добавьте ещё ${(TitleLength.MIN - valueLength)} символов(-а)`,
     );
   } else if (valueLength > TitleLength.MAX) {
     titleInput.style.borderColor = 'red';
     titleInput.setCustomValidity(
-      'Слишком длинный заголовок! Пожалуйста, удалите лишние ' +
-      (valueLength - TitleLength.MAX) +
-      ' символов(-а)',
+      `Слишком длинный заголовок! Пожалуйста, удалите лишние ${(valueLength - TitleLength.MAX)} символов(-а)`,
     );
   } else {
     titleInput.style.borderColor = '';
@@ -98,11 +91,7 @@ titleInput.addEventListener('input', () => {
 housingPrice.addEventListener('input', () => {
   if (housingPrice.value < MinPriceOfType[housingType.value]) {
     housingPrice.style.borderColor = 'red';
-    housingPrice.setCustomValidity(
-      'Минимальная цена за ночь - ' +
-      MinPriceOfType[housingType.value] +
-      ' руб.',
-    );
+    housingPrice.setCustomValidity(`Минимальная цена за ночь - ${MinPriceOfType[housingType.value]} руб.`);
   } else if (housingPrice.value > MAX_HOUSING_PRICE) {
     housingPrice.style.borderColor = 'red';
     housingPrice.setCustomValidity(
