@@ -55,7 +55,7 @@ mainPinMarker.on('move', (evt) => {
   getAddressCoordinates(positions);
 });
 
-const markers = [];
+const markerGroup = L.layerGroup().addTo(map);
 
 const addPinMarker = (place) => {
   const pinMarker = L.marker(
@@ -68,11 +68,9 @@ const addPinMarker = (place) => {
     },
   );
 
-  pinMarker.addTo(map).bindPopup(renderCard(place), {
+  pinMarker.addTo(markerGroup).bindPopup(renderCard(place), {
     keepInView: true,
   });
-
-  markers.push(pinMarker);
 };
 
 const createPins = (places) => {
@@ -81,9 +79,7 @@ const createPins = (places) => {
   });
 };
 
-const removePins = () => {
-  markers.forEach((marker) => marker.remove());
-};
+const removePins = () => markerGroup.clearLayers();
 
 const resetMap = () => {
   map.setView(TOKYO_CENTER, MAP_ZOOM);
