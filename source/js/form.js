@@ -7,6 +7,13 @@ import { resetPictures } from './picture.js';
 const COORDINATE_ACCURACY = 5;
 const MAX_HOUSING_PRICE = 1000000;
 
+const ROOMS_RESTRICTIONS = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0],
+};
+
 const TitleLength = {
   MIN: 30,
   MAX: 100,
@@ -105,35 +112,24 @@ housingPrice.addEventListener('input', () => {
   housingPrice.reportValidity();
 });
 
-const onRoomsPlacesNumberChange = () => {
-  if (roomNumber.value === '1' && capacity.value !== '1') {
-    capacity.style.borderColor = 'red';
-    capacity.setCustomValidity('Одна комната только для одного гостя!');
-  } else if (
-    roomNumber.value === '2' &&
-    capacity.value !== '1' &&
-    capacity.value !== '2'
-  ) {
-    capacity.style.borderColor = 'red';
-    capacity.setCustomValidity(
-      'Две комнаты только для одного или двух гостей!',
-    );
-  } else if (roomNumber.value === '3' && capacity.value === '0') {
-    capacity.style.borderColor = 'red';
-    capacity.setCustomValidity('Три комнаты для одного, двух или трех гостей!');
-  } else if (roomNumber.value === '100' && capacity.value !== '0') {
-    capacity.style.borderColor = 'red';
-    capacity.setCustomValidity('Сто комнат не для гостей!');
-  } else {
+const getRoomNumberValue = () => ROOMS_RESTRICTIONS[+roomNumber.value];
+
+const validateRoomsToCapacities = () => {
+  const roomNumberValue = getRoomNumberValue();
+
+  if (roomNumberValue.includes(+capacity.value)) {
     capacity.style.borderColor = '';
     capacity.setCustomValidity('');
+  } else {
+    capacity.style.borderColor = 'red';
+    capacity.setCustomValidity('Недопустимое количество гостей!');
   }
 
   capacity.reportValidity();
 };
 
-roomNumber.addEventListener('change', onRoomsPlacesNumberChange);
-capacity.addEventListener('change', onRoomsPlacesNumberChange);
+roomNumber.addEventListener('change', validateRoomsToCapacities);
+capacity.addEventListener('change', validateRoomsToCapacities);
 
 const resetPrice = () => {
   housingPrice.min = MinPriceOfType[housingType.value];
