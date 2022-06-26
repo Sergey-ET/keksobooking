@@ -21,7 +21,7 @@ const renderCard = ({ author, offer }) => {
   card.querySelector('.popup__avatar').src = author.avatar;
   card.querySelector('.popup__title').textContent = offer.title;
   card.querySelector('.popup__text--address').textContent = offer.address;
-  card.querySelector('.popup__text--price').innerHTML = `${offer.price} <span> ₽/ночь</span>`;
+  card.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь</span>`;
   card.querySelector('.popup__type').textContent = TYPES_IN_RUSSIAN[offer.type];
   card.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${getDeclension(offer.rooms, ROOM_DECLENSIONS)} ${offer.guests} ${getDeclension(offer.guests, GUEST_DECLENSIONS)}`;
   card.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
