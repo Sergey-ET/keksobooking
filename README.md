@@ -1,4 +1,4 @@
-# <img align="left" width="50" height="50" alt="HTML Academy" src="./build/img/muffin-red.svg"> "Keksobooking" - Real Estate Rental Ad Service
+# <img align="left" width="55" height="55" alt="HTML Academy" src="./build/img/muffin-red.svg"> "Keksobooking" - Real Estate Rental Ad Service
 
 <img align="left" width="50" height="50" alt="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/javascript/logo-for-github-2.png">
 
