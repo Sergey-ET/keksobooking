@@ -3,6 +3,7 @@ import { createPins, removePins, resetMap } from './map.js';
 import { resetFilter } from './filter.js';
 import { showSuccessPopup, showErrorPopup } from './popup.js';
 import { resetPictures } from './picture.js';
+import { toggleElements } from './util.js';
 
 const COORDINATE_ACCURACY = 5;
 const MAX_HOUSING_PRICE = 1000000;
@@ -43,18 +44,14 @@ const formSelects = form.querySelectorAll('select');
 
 const deactivateForm = () => {
   form.classList.add('ad-form--disabled');
-  formFieldsets.forEach((formFieldset) => {
-    formFieldset.disabled = true;
-  });
+  toggleElements(formFieldsets, true);
 };
 
 deactivateForm();
 
 const activateForm = () => {
   form.classList.remove('ad-form--disabled');
-  formFieldsets.forEach((formFieldset) => {
-    formFieldset.disabled = false;
-  });
+  toggleElements(formFieldsets, false);
 };
 
 housingType.addEventListener('change', () => {

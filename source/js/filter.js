@@ -1,3 +1,5 @@
+import { toggleElements } from './util.js';
+
 const DEFAULT_VALUE = 'any';
 
 const Prices = {
@@ -15,18 +17,14 @@ const filterFeatures = filter.querySelector('#housing-features');
 
 const deactivateFilter = () => {
   filter.classList.add('map__filters--disabled');
-  filterElements.forEach((filterElement) => {
-    filterElement.disabled = true;
-  });
+  toggleElements(filterElements, true);
 };
 
 deactivateFilter();
 
 const activateFilter = () => {
   filter.classList.remove('map__filters--disabled');
-  filterElements.forEach((filterElement) => {
-    filterElement.disabled = false;
-  });
+  toggleElements(filterElements, false);
 };
 
 const checkType = (data) => filterType.value === data.offer.type || filterType.value === DEFAULT_VALUE;

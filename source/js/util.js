@@ -37,4 +37,10 @@ const debounce = (cb, delay) => {
 
 const getDeclension = (number, txt, cases = [2, 0, 1, 1, 1, 2]) => txt[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 
-export { showAlert, isEscEvent, debounce, getDeclension };
+const toggleElements = (elements, toggle) => {
+  elements.forEach((element) => {
+    element.disabled = toggle;
+  });
+};
+
+export { showAlert, isEscEvent, debounce, getDeclension, toggleElements };
